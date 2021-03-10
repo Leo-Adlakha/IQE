@@ -34,6 +34,30 @@ def prepare_training_data_from_s7(dir_path='/Users/leoadlakha/Documents/Research
     print("Ready: Training Data from s7 Dataset")
     return X, Y
 
+def prepare_training_data_from_UFO120(dir_path='/Users/leoadlakha/Documents/Research Work/Image Qualty Enhancement/Dataset/UFO-120/train_val'):
+    
+    '''
+    This function prepares the UFO120 Dataset in the form of 
+    100 * 100 * 3 for each image
+    
+    dir_path - The path to the UFO120 Directory
+    '''
+    
+    X_UFO, Y_UFO = utils.load_UFO120_Dataset(dir_path='/Users/leoadlakha/Documents/Research Work/Image Qualty Enhancement/Dataset/UFO-120/train_val')
+    X = []
+    Y = []
+    c = 0
+    for i, j in zip(X_UFO, Y_UFO) :
+        c = c + 1
+        print(c)
+        crops_X = np.array(utils.crop_image_without_padding(100, 100, i)).astype('int32')
+        crops_Y = np.array(utils.crop_image_without_padding(100, 100, j)).astype('int32')
+        X.append(crops_X)
+        Y.append(crops_Y)
+    X = np.concatenate(X)
+    Y = np.concatenate(Y)
+    return X, Y
+
 def rotate_image_samsung_dataset(X, Y, idx=[26, 46, 68, 74]) :
     for i in idx :
         Y[i] = np.rot90(Y[i], k=1)
@@ -94,8 +118,6 @@ def load_UFO120_Dataset(dir_path='/Users/leoadlakha/Documents/Research Work/Imag
 
         x_data = np.asarray(x_image)
         y_data = np.asarray(y_image)
-
-        print(x_data.shape, y_data.shape)
 
         X.append(x_data)
         Y.append(y_data)
@@ -179,47 +201,47 @@ def show_img(x) :
 
 def crop_image_without_padding(x, y, img_array):
 
-	'''
-	This Function return a list of crope images in form numpy array 
-	without adding padding rejecting the left alone one
+    '''
+    This Function return a list of crope images in form numpy array 
+    without adding padding rejecting the left alone one
 
-	x, y - dimension of crop image
-	img_array - array representing image
-	'''
+    x, y - dimension of crop image
+    img_array - array representing image
+    '''
 
-	li = []
-	for i in range(x, img_array.shape[0] + 1, x):
-		for j in range(y, img_array.shape[1] + 1, y):
-			temp = np.zeros((x,y,3), dtype='float32')
-			for l in range(i-x, i, 1):
-				temp[l-i+x][:][:] = img_array[l][j-y: j][:]
-			li.append(temp);
+    li = []
+    for i in range(x, img_array.shape[0] + 1, x):
+        for j in range(y, img_array.shape[1] + 1, y):
+            temp = np.zeros((x,y,3), dtype='float32')
+            for l in range(i-x, i, 1):
+                temp[l-i+x][:][:] = img_array[l][j-y: j][:]
+            li.append(temp);
     li = np.array(li)
-	return li
+    return li
 
 
 def crop_image_with_padding(x, y, img_array):
 
-	'''
-	This Function return a list of crope images in form numpy array 
-	with padding as part of image
+    '''
+    This Function return a list of crope images in form numpy array 
+    with padding as part of image
 
-	x, y - dimension of crop image
-	img_array - array representing image
-	'''
+    x, y - dimension of crop image
+    img_array - array representing image
+    '''
 
-	li = []
-	for i in range(0, img_array.shape[0], x):
-		if(i+x > img_array.shape[0]):
-			i = img_array.shape[0] - x
-		for j in range(0, img_array.shape[1], y):
-			if(j+y > img_array.shape[1]):
-				j = img_array.shape[1] - y
-			temp = np.zeros((x,y,3), dtype='float32')
-			for l in range(i, i+x, 1):
-				temp[l-i][:][:] = img_array[l][j: j+y][:]
-			li.append(temp);
-	return li
+    li = []
+    for i in range(0, img_array.shape[0], x):
+        if(i+x > img_array.shape[0]):
+            i = img_array.shape[0] - x
+        for j in range(0, img_array.shape[1], y):
+            if(j+y > img_array.shape[1]):
+                j = img_array.shape[1] - y
+            temp = np.zeros((x,y,3), dtype='float32')
+            for l in range(i, i+x, 1):
+                temp[l-i][:][:] = img_array[l][j: j+y][:]
+            li.append(temp);
+    return li
 
 
 
