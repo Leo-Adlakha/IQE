@@ -3,6 +3,10 @@ import imageio
 import rawpy
 import matplotlib.pyplot as plt
 import os
+from keras.preprocessing.image import load_img
+from keras.preprocessing.image import img_to_array
+from keras.preprocessing.image import array_to_img
+from keras.preprocessing.image import save_img
 
 def load_samsung_dataset(dir_path = '/Users/leoadlakha/Documents/Research Work/Image Quality Enhancement/Dataset/samsungs7Dataset/S7-ISP-Dataset/') :
     
@@ -44,3 +48,49 @@ def show_img(x) :
     plt.imshow(x)
     plt.title(str(x.shape))
     plt.show()
+
+
+
+def crop_image_xy(x, y, img_array):
+
+	'''
+	This Function return a list of crope images in form numpy array
+
+		x, y - dimension of crop image
+		img_array - array representing image
+	'''
+
+	li = []
+	for i in range(0, img_array.shape[0], x):
+		for j in range(0, img_array.shape[1], y):
+			temp = np.zeros((x,y,3), dtype='float32')
+			for l in range(i, min(i+x,img_array.shape[0]), 1):
+				temp[l%x][j%y : min(j%y + y, img_array.shape[1])][:] = img_array[l][j: min(j+y, img_array.shape[1])][:]
+			li.append(temp);
+	return li
+
+
+
+def combine_crop(li, s, x, y):
+
+	'''
+	This Function combine the crop images into the original one
+
+		x, y - dimension of crop image
+		li - list of images in form of numpy array
+		s - shape of original image	
+	'''
+
+	temp = np.zeros((s), dtype='float32')
+	prev_idx = 0
+	for i in range(s[0]):
+		idx = prev_idx
+		if (i%x == 0 and i > 0):
+	  		idx += (s[1]//y)
+	  		prev_idx = idx
+		for j in range(s[1]):
+	  		if(j%y == 0):
+	    		arr = li[idx]
+	    		idx += 1
+	  		temp[i][j][:] = arr[i%x][j%y][:]
+	return temp
