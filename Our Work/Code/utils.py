@@ -3,6 +3,7 @@ import imageio
 import rawpy
 import matplotlib.pyplot as plt
 import os
+from PIL import Image
 from keras.preprocessing.image import load_img
 from keras.preprocessing.image import img_to_array
 from keras.preprocessing.image import array_to_img
@@ -79,6 +80,65 @@ def load_UFO120_Dataset(dir_path='/Users/leoadlakha/Documents/Research Work/Imag
     Y = np.array(Y)
     
     return X, Y
+
+def get_Data_For_DPED_Model(x, y):
+    
+    '''
+    This function takes the path of the directories of both LQ and HQ Images, 
+    and return the images read in .jpg format and returns them as a numpy array.
+    
+        x - It is the LQ Images Directory taken by Blueberry/Iphone/Sony Camera.
+        y - It is the HQ Images Directory taken by Canon Camera.
+    '''
+    
+    X = []
+    Y = []
+    for i, j in zip(os.listdir(x), os.listdir(y)) :
+
+        if i.endswith('.jpg') and j.endswith('.jpg') :
+            x_image = Image.open(os.path.join(x, i))
+            y_image = Image.open(os.path.join(y, j))
+
+            x_array = np.asarray(x_image)
+            y_array = np.asarray(y_image)
+
+            X.append(x_array)
+            Y.append(y_array)
+
+    X = np.array(X)
+    Y = np.array(Y)
+    
+    return X, Y
+
+def load_DPED_Dataset(dir_path='/Users/leoadlakha/Documents/Research Work/Image Qualty Enhancement/Dataset/dped') :
+    
+    '''
+    This function takes the path of the directory, and return the images read
+    in .jpg format and returns them as a numpy array.
+    
+        dir_path - It is the path of DPED Directory.
+    '''
+    
+    bb = os.path.join(dir_path, 'blackberry/training_data')
+    ip = os.path.join(dir_path, 'iphone/training_data')
+    sn = os.path.join(dir_path, 'sony/training_data')
+    
+    x_bb = os.path.join(bb, 'blackberry')
+    x_ip = os.path.join(ip, 'iphone')
+    x_sn = os.path.join(sn, 'sony')
+
+    y_bb = os.path.join(bb, 'canon')
+    y_ip = os.path.join(ip, 'canon')
+    y_sn = os.path.join(sn, 'canon')
+    
+    X_BB, Y_BB = get_Data_For_DPED_Model(x_bb, y_bb)
+    print("Done with Blueberry")
+    X_IP, Y_IP = get_Data_For_DPED_Model(x_ip, y_ip)
+    print("Done with Iphone")
+    X_SN, Y_SN = get_Data_For_DPED_Model(x_sn, y_sn)
+    print("Done with Sony")
+    
+    return np.concatenate((X_BB, X_IP, X_SN)), np.concatenate((Y_BB, Y_IP, Y_SN))
 
 def show_img(x) :
     
