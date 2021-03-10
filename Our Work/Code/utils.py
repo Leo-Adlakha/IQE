@@ -8,17 +8,22 @@ from keras.preprocessing.image import img_to_array
 from keras.preprocessing.image import array_to_img
 from keras.preprocessing.image import save_img
 
+def rotate_image_samsung_dataset(X, Y, idx=[26, 46, 68, 74]) :
+    for i in idx :
+        Y[i] = np.rot90(Y[i], k=1)
+        X[i] = np.rot90(X[i], k=1)
+
 def load_samsung_dataset(dir_path = '/Users/leoadlakha/Documents/Research Work/Image Quality Enhancement/Dataset/samsungs7Dataset/S7-ISP-Dataset/') :
     
     '''
     This function takes the path of the directory, and return the images read
-    in .dng format and returns them as a numpy array.
+    in .jpg format and returns them as a numpy array.
     
         dir_path - It is the path of Samsung-s7 Directory.
     '''
     
-    X = np.array()
-    Y = np.array()
+    X = []
+    Y = []
     c = 0
     for folder in os.listdir(dir_path) :
         folder_path = dir_path + folder
@@ -27,14 +32,52 @@ def load_samsung_dataset(dir_path = '/Users/leoadlakha/Documents/Research Work/I
         if not folder.startswith('2016') :
             continue
         for file in os.listdir(folder_path) :
-            if file.endswith('.dng') :
+            if file.endswith('.jpg') :
                 img_path = folder_path + '/' + file
-                with rawpy.imread(img_path) as raw :
-                    if file.startswith('medium') :
-                        Y.append(raw.postprocess())
-                    else :
-                        X.append(raw.postprocess())
+                image = Image.open(img_path)
+                if ( file.startswith('medium') and file.endswith('.jpg') ) :
+                    Y.append(np.asarray(image))
+                elif ( file.startswith('short') and file.endswith('.jpg') ) :
+                    X.append(np.asarray(image))
                         
+    X = np.array(X)
+    Y = np.array(Y)
+#     rotate_image_samsung_dataset(X, Y, idx=[26, 46, 68, 74])
+    
+    return X, Y
+
+def load_UFO120_Dataset(dir_path='/Users/leoadlakha/Documents/Research Work/Image Qualty Enhancement/Dataset/UFO-120/train_val') :
+    
+    '''
+    This function takes the path of the directory, and return the images read
+    in .jpg format and returns them as a numpy array.
+    
+        dir_path - It is the path of UFO120 Directory.
+    '''
+    
+    x_train = os.path.join(dir_path, 'lrd')
+    y_train = os.path.join(dir_path, 'hr')
+    
+    X = []
+    Y = []
+    for x, y in zip(os.listdir(x_train), os.listdir(y_train)) :
+        x_path = os.path.join(x_train, x)
+        y_path = os.path.join(y_train, y)
+
+        x_image = Image.open(x_path)
+        y_image = Image.open(y_path)
+        y_image = y_image.resize(x_image.size)
+
+        x_data = np.asarray(x_image)
+        y_data = np.asarray(y_image)
+
+        print(x_data.shape, y_data.shape)
+
+        X.append(x_data)
+        Y.append(y_data)
+    X = np.array(X)
+    Y = np.array(Y)
+    
     return X, Y
 
 def show_img(x) :
