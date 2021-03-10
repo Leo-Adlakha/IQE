@@ -9,6 +9,31 @@ from keras.preprocessing.image import img_to_array
 from keras.preprocessing.image import array_to_img
 from keras.preprocessing.image import save_img
 
+def prepare_training_data_from_s7(dir_path='/Users/leoadlakha/Documents/Research Work/Image Qualty Enhancement/Dataset/samsungs7Dataset/S7-ISP-Dataset/') :
+    
+    '''
+    This function prepares the s7 Dataset in the form of 
+    100 * 100 * 3 for each image
+    
+    dir_path - The path to the s7 Directory
+    '''
+    
+    X_s7, Y_s7 = utils.load_samsung_dataset(dir_path='/Users/leoadlakha/Documents/Research Work/Image Qualty Enhancement/Dataset/samsungs7Dataset/S7-ISP-Dataset/')
+    X = []
+    Y = []
+    c = 0
+    for i, j in zip(X_s7, Y_s7) :
+        c = c + 1
+        print(c)
+        crops_X = np.array(utils.crop_image_without_padding(100, 100, i)).astype('int32')
+        crops_Y = np.array(utils.crop_image_without_padding(100, 100, j)).astype('int32')
+        X.append(crops_X)
+        Y.append(crops_Y)
+    X = np.concatenate(X)
+    Y = np.concatenate(Y)
+    print("Ready: Training Data from s7 Dataset")
+    return X, Y
+
 def rotate_image_samsung_dataset(X, Y, idx=[26, 46, 68, 74]) :
     for i in idx :
         Y[i] = np.rot90(Y[i], k=1)
@@ -25,16 +50,13 @@ def load_samsung_dataset(dir_path = '/Users/leoadlakha/Documents/Research Work/I
     
     X = []
     Y = []
-    c = 0
     for folder in os.listdir(dir_path) :
         folder_path = dir_path + folder
-        c += 1 
-        print(c)
         if not folder.startswith('2016') :
             continue
         for file in os.listdir(folder_path) :
             if file.endswith('.jpg') :
-                img_path = folder_path + '/' + file
+                img_path = os.path.join(folder_path, file)
                 image = Image.open(img_path)
                 if ( file.startswith('medium') and file.endswith('.jpg') ) :
                     Y.append(np.asarray(image))
@@ -43,6 +65,7 @@ def load_samsung_dataset(dir_path = '/Users/leoadlakha/Documents/Research Work/I
                         
     X = np.array(X)
     Y = np.array(Y)
+    print("Loaded Samsung Dataset")
 #     rotate_image_samsung_dataset(X, Y, idx=[26, 46, 68, 74])
     
     return X, Y
@@ -78,6 +101,7 @@ def load_UFO120_Dataset(dir_path='/Users/leoadlakha/Documents/Research Work/Imag
         Y.append(y_data)
     X = np.array(X)
     Y = np.array(Y)
+    print("Loaded UFO120 Dataset")
     
     return X, Y
 
@@ -170,6 +194,7 @@ def crop_image_without_padding(x, y, img_array):
 			for l in range(i-x, i, 1):
 				temp[l-i+x][:][:] = img_array[l][j-y: j][:]
 			li.append(temp);
+    li = np.array(li)
 	return li
 
 
