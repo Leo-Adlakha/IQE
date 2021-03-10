@@ -48,7 +48,7 @@ def show_img(x) :
     plt.imshow(x)
     plt.title(str(x.shape))
     plt.show()
- 
+
 
 def crop_image_without_padding(x, y, img_array):
 
@@ -84,7 +84,6 @@ def crop_image_with_padding(x, y, img_array):
 	for i in range(0, img_array.shape[0], x):
 		if(i+x > img_array.shape[0]):
 			i = img_array.shape[0] - x
-		print(i)
 		for j in range(0, img_array.shape[1], y):
 			if(j+y > img_array.shape[1]):
 				j = img_array.shape[1] - y
