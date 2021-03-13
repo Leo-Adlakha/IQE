@@ -127,3 +127,4 @@ dmypy.json
 **/*.pdf
 Dataset/**
 Related Research Papers/**
+**/imagenet-vgg-verydeep-19.mat
