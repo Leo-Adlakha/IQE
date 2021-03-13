@@ -1,6 +1,9 @@
 Packages installed: 
-Pillow
+PIL
 numpy
 imageio
 rawpy
 keras
+scipy.io
+tf-2.0-alpha
+matplotlib
