@@ -4,57 +4,59 @@ import numpy as np
 
 def Generator(input_image) :
     
-    # Convolution Layer
-    W1 = weights_init([9, 9, 3, 64], name='W1')
-    B1 = bias_init([64], name="B!")
-    C1 = tf.nn.relu(conv2d(input_image, W1, B1))
-    
-    # Residual Block * 4
-    C3 = Residual_Block(C1, 1)
-    C5 = Residual_Block(C3, 2)
-    C7 = Residual_Block(C5, 3)
-    C9 = Residual_Block(C7, 4)
-    
-    # Convolution Layer * 2
-    W10 = weights_init([3,3,64,64], name='W10')
-    B10 = bias_init([64], name="B10")
-    C10 = tf.nn.relu(conv2d(C9, W10, B10))
-    
-    W11 = weights_init([3,3,64,64], name='W11')
-    B11 = bias_init([64], name="B11")
-    C11 = tf.nn.relu(conv2d(C10, W11, B11))
-    
-    # Final Layer
-    W12 = weights_init([9, 9, 64, 3], name="W12")
-    B12 = bias_init([3], name="B12")
-    C12 = tf.nn.tanh(conv2d(C11, W12, B12)) * 0.58 + 0.5
-    
+    with tf.compat.v1.variable_scope("generator") :
+        # Convolution Layer
+        W1 = weights_init([9, 9, 3, 64], name='W1')
+        B1 = bias_init([64], name="B!")
+        C1 = tf.nn.relu(conv2d(input_image, W1, B1))
+
+        # Residual Block * 4
+        C3 = Residual_Block(C1, 1)
+        C5 = Residual_Block(C3, 2)
+        C7 = Residual_Block(C5, 3)
+        C9 = Residual_Block(C7, 4)
+
+        # Convolution Layer * 2
+        W10 = weights_init([3,3,64,64], name='W10')
+        B10 = bias_init([64], name="B10")
+        C10 = tf.nn.relu(conv2d(C9, W10, B10))
+
+        W11 = weights_init([3,3,64,64], name='W11')
+        B11 = bias_init([64], name="B11")
+        C11 = tf.nn.relu(conv2d(C10, W11, B11))
+
+        # Final Layer
+        W12 = weights_init([9, 9, 64, 3], name="W12")
+        B12 = bias_init([3], name="B12")
+        C12 = tf.nn.tanh(conv2d(C11, W12, B12)) * 0.58 + 0.5
+
     return C12
 
 def Discriminator(image) :
     
-    conv1 = conv_layer(image, 48, 11, 4, batch_nn=False)
-    conv2 = conv_layer(conv1, 128, 5, 2)
-    conv3 = conv_layer(conv2, 192, 3, 1)
-    conv4 = conv_layer(conv3, 192, 3, 1)
-    conv5 = conv_layer(conv4, 128, 3, 2)
-    
-    # Flatten
-    
-    flat_size = 128 * 7 * 7
-    conv5_flat = tf.reshape(conv5, [-1, flat_size])
-    
-    # FC Layer
-    
-    weights_fc = tf.Variable(tf.random.normal([flat_size, 1024], stddev=0.01))
-    bias_fc = tf.Variable(tf.constant(0.01, shape=[1024]))
-    fc = tf.nn.leaky_relu(tf.matmul(conv5_flat, weights_fc) + bias_fc, alpha=0.2)
-    
-    # FC Layer
-    weights_out = tf.Variable(tf.random.normal([1024, 2], stddev=0.01))
-    bias_out = tf.Variable(tf.constant(0.01, shape=[2]))
-    
-    output = tf.nn.softmax(tf.matmul(fc, weights_out)+bias_out)
+    with tf.compat.v1.variable_scope("discriminator") :
+        conv1 = conv_layer(image, 48, 11, 4, batch_nn=False)
+        conv2 = conv_layer(conv1, 128, 5, 2)
+        conv3 = conv_layer(conv2, 192, 3, 1)
+        conv4 = conv_layer(conv3, 192, 3, 1)
+        conv5 = conv_layer(conv4, 128, 3, 2)
+
+        # Flatten
+
+        flat_size = 128 * 7 * 7
+        conv5_flat = tf.reshape(conv5, [-1, flat_size])
+
+        # FC Layer
+
+        weights_fc = tf.Variable(tf.random.normal([flat_size, 1024], stddev=0.01))
+        bias_fc = tf.Variable(tf.constant(0.01, shape=[1024]))
+        fc = tf.nn.leaky_relu(tf.matmul(conv5_flat, weights_fc) + bias_fc, alpha=0.2)
+
+        # FC Layer
+        weights_out = tf.Variable(tf.random.normal([1024, 2], stddev=0.01))
+        bias_out = tf.Variable(tf.constant(0.01, shape=[2]))
+
+        output = tf.nn.softmax(tf.matmul(fc, weights_out)+bias_out)
 
     return output
 
