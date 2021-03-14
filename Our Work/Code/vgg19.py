@@ -29,7 +29,7 @@ def _pool_layer(input):
 def preprocess(image):
     return image - IMAGE_MEAN
 
-def vgg19NetworkPass() :
+def vgg19NetworkPass(input_image) :
     net = {}
     current = input_image
     for i, name in enumerate(layers):

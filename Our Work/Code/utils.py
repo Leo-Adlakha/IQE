@@ -8,6 +8,10 @@ from keras.preprocessing.image import load_img
 from keras.preprocessing.image import img_to_array
 from keras.preprocessing.image import array_to_img
 from keras.preprocessing.image import save_img
+import scipy.stats as st
+import sys
+from functools import reduce
+from operator import mul
 
 def prepare_training_data_from_s7(dir_path='/Users/leoadlakha/Documents/Research Work/Image Qualty Enhancement/Dataset/samsungs7Dataset/S7-ISP-Dataset/') :
     
@@ -243,7 +247,56 @@ def crop_image_with_padding(x, y, img_array):
             li.append(temp);
     return li
 
+def log10(x):
+    
+    '''
+    Function to calculate log10(x)
+    
+    x - Value for which log10 is to be returned
+    '''
+    
+    numerator = tf.compat.v1.log(x)
+    denominator = tf.compat.v1.log(tf.constant(10, dtype=numerator.dtype))
+    return numerator / denominator
 
+
+def _tensor_size(tensor):
+    
+    '''
+    Returns the Size of the Tensor
+    
+    tensor - A Tensor
+    '''
+    
+    return reduce(mul, (d.value for d in tensor.get_shape()[1:]), 1)
+
+
+def gauss_kernel(kernlen=21, nsig=3, channels=1):
+    
+    '''
+    Function to Help the blur Function which helps in calculating 
+    the Color Loss of the model.
+    '''
+    
+    interval = (2*nsig+1.)/(kernlen)
+    x = np.linspace(-nsig-interval/2., nsig+interval/2., kernlen+1)
+    kern1d = np.diff(st.norm.cdf(x))
+    kernel_raw = np.sqrt(np.outer(kern1d, kern1d))
+    kernel = kernel_raw/kernel_raw.sum()
+    out_filter = np.array(kernel, dtype = np.float32)
+    out_filter = out_filter.reshape((kernlen, kernlen, 1, 1))
+    out_filter = np.repeat(out_filter, channels, axis = 2)
+    return out_filter
+
+
+def blur(x):
+    
+    '''
+    Helper function used for calculating the Color Loss
+    '''
+    
+    kernel_var = gauss_kernel(21, 3, 3)
+    return tf.nn.depthwise_conv2d(x, kernel_var, [1, 1, 1, 1], padding='SAME')
 
 # def combine_crop(li, s, x, y):
 
