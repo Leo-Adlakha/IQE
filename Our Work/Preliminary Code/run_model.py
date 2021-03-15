@@ -1,4 +1,3 @@
-# To test the model use the following code:
 # python run_model.py model=<model> resolution=<resolution> use_gpu=<use_gpu>
 # <model> = {iphone, blackberry, sony}
 # <resolution> = {orig, high, medium, small, tiny}

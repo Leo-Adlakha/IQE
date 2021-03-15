@@ -7,7 +7,7 @@ def Generator(input_image) :
     with tf.compat.v1.variable_scope("generator") :
         # Convolution Layer
         W1 = weights_init([9, 9, 3, 64], name='W1')
-        B1 = bias_init([64], name="B!")
+        B1 = bias_init([64], name="B1")
         C1 = tf.nn.relu(conv2d(input_image, W1, B1))
 
         # Residual Block * 4
