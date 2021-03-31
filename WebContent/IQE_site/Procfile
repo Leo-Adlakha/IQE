@@ -1,0 +1,1 @@
+web: gunicorn IQE_site.wsgi --log-file -
