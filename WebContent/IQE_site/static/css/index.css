@@ -1,0 +1,415 @@
+body, html{
+    margin: 0;
+    height: 100%;
+    font-family: normal Quicksand;
+    scroll-behavior: smooth;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+}
+
+.container{
+    flex-basis: 200px;
+}
+
+.page-links a{
+    padding: 10px;
+}
+
+.page-links{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.head-content a{
+    padding-left: 10px;
+    color: white;
+}
+
+.head-container{
+    background-image: url('../images/main.jpg');
+    background-size: cover;
+    flex-basis: 200px;
+}
+
+.head-container nav a{
+    /* color: white; */
+    text-decoration: none;
+}
+
+.head{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+    animation: head-animation 0.7s ease-in;
+    padding-bottom: 22%;
+}
+
+h1{
+    font-size: 80px;
+    font-family: Quicksand;
+    font-weight: 700;
+    color: white;
+    margin-top: 15%;
+    margin-bottom: 0;
+}
+
+.head h3{
+    font-size: 35px;
+    font-family: Quicksand;
+    font-weight: 400;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.head a{
+    text-decoration: none;
+    background-color: royalblue;
+    color: white;
+    padding: 20px 25px 15px 65px;
+    border-radius: 10px;
+    width: 300px;
+    height:45px;
+    text-transform: uppercase;
+    font-family: Quicksand;
+    font-weight: 400;
+    font-size: 30px;
+    transition-duration: 0.4s;
+}
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    height: 80px;
+    align-items: center;
+    padding: 20px 80px 20px 80px;
+    font-size: 25px;
+    font-family: Quicksand;
+    animation: navbar-animation 0.7s ease-in;
+}
+
+.dest-img-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.dest-image{
+    flex-basis: 300px;
+    height: 350px;
+    flex-grow: 1;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.large{
+    flex-grow: 20;
+}
+
+.dest-container{
+    padding: 5%;
+    background-color: whitesmoke;
+}
+
+.test-container{
+    padding: 5% 20% 5% 20%;
+    background-color: linen;
+}
+
+.lm-container{
+    padding: 5% 20% 5% 20%;
+    background-color: whitesmoke;
+}
+
+hr{
+    color: black;
+    margin: 40px 40% 40px 40%;
+    padding: 2px;
+    background-color: darkslateblue;
+    border-radius: 10px;
+}
+
+.dest-info, .dest-container h2, .tp-container h2, .tp-info, .test-container h2, .lm-container h2, .lm-info{ 
+    text-align: center;
+}
+
+.dest-container h2, .tp-container h2, .test-container h2, .lm-container h2{
+    font-family: Quicksand;
+    font-weight: 700;
+    color: dimgray;
+    font-size: 40px;
+    margin-bottom: 30px;
+    margin-top: 0;
+}
+
+.dest-info, .tp-info, .lm-info{
+    font-weight: 400;
+    font-family: Quicksand;
+    font-stretch: wider;
+    font-size: 20px;
+}
+
+.dest-info{
+    margin: 0 100px 0 100px;
+}
+
+.lm-info{
+    padding: 0 10% 0 10%;
+}
+
+.tp-box-container{
+    padding-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-basis: 40%;
+    justify-content: space-around;
+}
+
+.box{
+    text-align: center;
+    color: dimgray;
+    width: 40%;
+    padding: 10px;
+}
+
+.box h3{
+    font-size: 30px;
+    font-family: Quicksand;
+}
+
+.box h5{
+    font-size: 15px;
+    font-family: Quicksand;
+}
+
+.box i{
+    font-size: 150px;
+    color: mediumslateblue;
+}
+
+.test-info{
+    display: flex;
+    flex-direction: column;
+}
+
+.test{
+    flex-basis: 150px;
+    padding-top: 3%;
+}
+
+.comment{
+    font-family: Quicksand;
+    font-weight: 400;
+    color: dimgray;
+    font-size: 25px;
+    text-align: center;
+}
+
+.test-author{
+    font-family: Quicksand;
+    font-weight: 700;
+    color: dimgray;
+    font-size: 20px;
+    text-align: center;
+    padding-top: 10px;
+}
+
+form{
+    text-align: center;
+}
+
+form input{
+    height: 40px;
+    width: 500px;
+    font-size: 25px;
+    font-family: Quicksand;
+    padding: 5px 0 5px 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+form button{
+    height: 50px;
+    width: 200px;
+    font-size: 20px;
+    font-family: Quicksand;
+    margin-left: 20px;
+    border: none;
+    padding: 5px 10px 5px 10px;
+    border-radius: 10px;
+    background-color: royalblue;
+    color: white;
+    font-family: Quicksand;
+    font-size: 400;
+    text-transform: uppercase;
+    transition-duration: 0.4s;
+}
+
+form button:hover{
+    border: 2px solid royalblue;
+    background-color: white;
+    color: royalblue;
+    transition-duration: 0.4s;
+}
+
+.head a:hover{
+    border: 5px solid royalblue;
+    background-color: white;
+    color: royalblue;
+    font-weight: 700;
+    transition-duration: 0.4s;
+}
+
+.footer-container{
+    height: 100px;
+    font-family: Quicksand;
+    background-color: slategrey;
+}
+
+.footer-container h4{
+    float: left;
+    margin: 20px 5% 20px 5%;
+    color: white;
+    opacity: 0.8;
+}
+
+.social-icons{
+    display: flex;
+    align-content: center;
+    padding-left: 100px;
+}
+
+.social-icons i{
+    color: white;
+    opacity: 0.8;
+    padding: 10px;
+    font-size: 40px;
+}
+
+@keyframes navbar-animation{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+@keyframes head-animation{
+    0%{
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media all and (max-width: 700px){
+    nav{
+        flex-direction: column;
+        padding-top: 20px;
+    }
+
+    .page-links{
+        flex-direction: column;
+    }
+
+    .page-links a{
+        padding: 5px;
+    }
+
+    h1{
+        font-size: 60px;
+        padding-top: 50px;
+    }
+
+    .head h3{
+        font-size: 25px;
+        text-align: center;
+        padding: 10px 40px 10px 40px;
+    }
+
+    .head a{
+        height: 30px;
+        width: 200px;
+        font-size: 20px;
+        padding: 15px;
+        text-align: center;
+        margin-bottom: 0;
+        margin-top: 10px;
+    }
+
+    .dest-container, .tp-container, .test-container, .lm-container{
+        padding: 0 5% 50px 5%;
+
+    }
+
+    .dest-container h2, .tp-container h2, .test-container h2, .lm-container h2{
+        font-size: 30px;
+        padding-top: 50px;
+    }
+
+    .dest-info, .tp-info, .lm-info{
+        font-size: 20px ;
+        margin: 0 10px 0 10px;
+    }  
+    
+    hr{
+        margin: 40px 30% 40px 30%;
+    }
+
+    .dest-img-container{
+        flex-direction: column;
+    }
+
+    .tp-box-container{
+        flex-direction: column;
+        align-items: center;
+        padding-top: 0;
+    }
+
+    .box{
+        width: 80%;
+    }
+
+    .box i, .box h3, .box h5{
+        margin: 5px 10px 10px 10px;
+    }
+
+    .comment{
+        font-size: 20px;   
+    }
+
+    .test-author{
+        margin-bottom: 30px;
+    }
+
+    .lm-info{
+        padding: 0;
+    }
+
+    form input{
+        width: 400px;
+        margin-bottom: 20px;
+    }
+
+    .footer-container{
+        height: fit-content;
+    }
+
+    .footer-container h4{
+        float: none;
+        text-align: center;
+        margin: 20px;
+    }
+
+    .social-icons{
+        padding-left: 35%;
+    }
+}

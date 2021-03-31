@@ -1,0 +1,111 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Image Quality Enhancement</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+<body>
+  
+  <div class="container head-container" id="main_section">
+    <nav class="head-content">
+      <a href="#main_section">IQE</a>
+      <div class="page-links">
+        <a href="#about_section">About</a>
+        <a href="#enhancer_section">Try Enhancer !</a>
+        <a href="#contact_section">Contact Us</a>
+      </div>
+    </nav>
+    <div class="head">
+      <h1>Image Quality Enhancement</h1>
+      <h3>Image Quality Enhancement using DCGANs</h3>
+      <a href="#contact_section">Conatct Us Now</a>
+    </div>
+  </div>
+
+  <div class="container dest-container" id="about_section">
+    <h2>About</h2>
+    <div class="dest-info">
+      We present a novel approach to adjust various image properties of low-light images to yield an enhanced image with better contrast, brightness, etc.  The problem is to enhance the quality of images taken from various mobile devices like iPhone, Samsung etc. We propose a deep learning-based approach involving Deep Convolutional Generative Adversarial Networks (GANs), that can be trained with a pair of images of low quality as a noise matrix and the output of the generator is used to compare the results when this output and high quality image ( groundtruth ) are fed into the Discriminator to obtain various losses involving color, texture, etc. It works very well on real life test images taken from the publicly available datasets like samsung-s7 and MIT-Adobe 5K Dataset. Some of our results are shown below on low-light images.
+    </div>
+    <hr>
+    <div class="dest-img-container">
+      <img src="../static/images/0.png" alt="" class="dest-image">
+      <img src="../static/images/1.png" alt="" class="dest-image">
+      <img src="../static/images/2.png" alt="" class="dest-image">
+      <img src="../static/images/3.png" alt="" class="dest-image">
+      <img src="../static/images/4.png" alt="" class="dest-image">
+      <img src="../static/images/5.png" alt="" class="dest-image">
+    </div>
+  </div>
+
+  <div class="container test-container" id="enhancer_section">
+    <h2>Try the Image Enhancer !</h2>
+    <hr>
+      <form method = "POST" enctype="multipart/form-data">
+        {% csrf_token %}
+          <input type="file" name="input_image" id="low_image">
+          <button type="submit">Enhance</button>
+      </form>
+  </div>
+
+  <div class="container lm-container" id="contact_section">
+    <h2>Contact Us</h2>
+    <div class="lm-info">
+      Want to know more about our IQE-DCGAN model, or want to check it out for yourself? Just sign up for our mailing list to know more about the advancements to the model.
+    </div>
+    <hr>
+    <form action="">
+      <input type="email" name="" id="" placeholder="Email">
+      <button>Subscribe Now</button>
+    </form>
+  </div>
+
+  
+  <div class="footer-container container">
+    <h4>
+      Refer GitHub for Code 
+    </h4>
+    <h4>
+      Click on the GitHub Icon for more information. Do star the repository if you like it! Do fork the repository to contribute!
+    </h4>
+    <div class="social-icons">
+      <a href="https://github.com/Leo-Adlakha/IQE"><i class="fa fa-github"></i></a>
+    </div>
+  </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+      // Add smooth scrolling to all links
+      $("a").on('click', function(event) {
+    
+        // Make sure this.hash has a value before overriding default behavior
+        if (this.hash !== "") {
+          // Prevent default anchor click behavior
+          event.preventDefault();
+    
+          // Store hash
+          var hash = this.hash;
+    
+          // Using jQuery's animate() method to add smooth page scroll
+          // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+          $('html, body').animate({
+            scrollTop: $(hash).offset().top
+          }, 800, function(){
+    
+            // Add hash (#) to URL when done scrolling (default click behavior)
+            window.location.hash = hash;
+          });
+        } // End if
+      });
+    });
+    </script>
+</body>
+</html>
