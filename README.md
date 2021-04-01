@@ -1,10 +1,9 @@
 # IQE: Image Quality Enhancement using DCGANs
 
-Leo Adlakha, Prateek Bhardwaj, Abhijeet Singh Varun
+*Leo Adlakha, Prateek Bhardwaj, Abhijeet Singh Varun*
+*from Netaji Subhas University of Technology, Delhi, India*
 
-Netaji Subhas University of Technology, Delhi, India
-
-[IQE](https://iqe-os.herokuapp.com/): Image Quality Enhancement is developed to enhance the quality of low-light images with size (1536, 2048, 3). Some of the results are shown below: 
+**[IQE](https://iqe-os.herokuapp.com/)**: Image Quality Enhancement is developed to enhance the quality of low-light images with size (1536, 2048, 3). Some of the results are shown below: 
 
 ![demo](images/result.png)
 ![demo](images/result1.png)
