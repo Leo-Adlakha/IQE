@@ -1,0 +1,1 @@
+web: cd IQE_site/ && gunicorn IQE_site.wsgi -t 180 --log-file -
