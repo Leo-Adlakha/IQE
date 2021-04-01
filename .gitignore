@@ -124,7 +124,7 @@ dmypy.json
 .pyre/
 
 # Others
-**/*.pdf
+
 Dataset/**
 Related Research Papers/**
 **/imagenet-vgg-verydeep-19.mat
