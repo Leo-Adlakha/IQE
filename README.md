@@ -1,4 +1,4 @@
-# IQE
+# IQE: Image Quality Enhancement using DCGANs
 
 Leo Adlakha, Prateek Bhardwaj, Abhijeet Singh Varun
 
@@ -6,11 +6,9 @@ Netaji Subhas University of Technology, Delhi, India
 
 [IQE](https://iqe-os.herokuapp.com/): Image Quality Enhancement is developed to enhance the quality of low-light images with size (1536, 2048, 3). Some of the results are shown below: 
 
-<p align="center">
-    <img src="https://github.com/Leo-Adlakha/IQE/images/result.png" height="256" width="341">
-    <img src="https://github.com/Leo-Adlakha/IQE/images/result1.png" height="256" width="341">
-    <img src="https://github.com/Leo-Adlakha/IQE/images/result2.png" height="256" width="341">
-</p>
+![demo](images/result.png)
+![demo](images/result1.png)
+![demo](images/result2.png)
 
 ## Requirements
 
@@ -34,7 +32,7 @@ _requirements.txt_ contains the Python packages used by the code and the website
 1. MIT-Adobe 5K Dataset
 2. Samsung-s7 Dataset
 
-## Installation
+## Installation and Setup Guide for Unix/Linux
 
 ### For Model
 
@@ -60,3 +58,71 @@ $ source env/bin/activate
 ```
 $ pip install -r requirement.txt
 ```
+
+4. Change Directory to that of test_model.py
+
+```
+$ cd Our\ Work/Preliminary\ Code/
+```
+
+5. Run the model
+
+* There are a few settings for the model to be run. Three Models are present based on the type of dataset used - iphone, blackberry, sony
+* If you have a gpu then put use_gpu to true else to false
+
+For ex -
+
+```
+$ python3 test_model.py resolution=orig model=iphone use_gpu=false
+```
+
+### For WebSite
+
+1. Clone the Github Repository
+
+```
+$ git clone https://github.com/Leo-Adlakha/IQE && cd IQE/
+```
+
+2. Create a new Environment for the Project using virtualenv
+
+**Note** - Install pip package manager from [here](https://pip.pypa.io/en/stable/installing/)
+
+```
+$ pip install virtualenv
+$ python3 -m venv env
+$ source env/bin/activate
+```
+
+
+3. Install all the necessary Packages in requirements.txt using pip package manager
+
+```
+$ pip install -r requirement.txt
+```
+
+4. Change Directory to run the Django Server
+
+```
+$ cd WebContent/IQE_site/
+```
+
+5. Run server on your machine
+
+```
+$ python3 manage.py runserver
+```
+
+Now, you may open your browser and go to http://127.0.0.1:8000/
+
+After, you see the website, in the Enhancer Section, upload an image of dimension (1536, 2048, 3) and wait for the magic to happen :sparkles: !
+
+Your result will be automatically downlaoded.
+
+## Contact Us
+
+[Leo Adlakha](mailto:leoa.co18@nsut.ac.in)
+
+[Prateek Bhardwaj](mailto:prateekb.co18@nsut.ac.in)
+
+[Abhijeet Singh Varun](mailto:abhijeets.co18@nsut.ac.in)
