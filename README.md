@@ -66,7 +66,7 @@ $ cd MachineLearningContent/Preliminary\ Code/
 
 5. Run the model
 
-* There are a few settings for the model to be run. Three Models are present based on the type of dataset used - iphone, blackberry, sony
+* There are a few settings for the model to be run. Three Models are present based on the type of dataset used - iphone, blackberry and sony
 * If you have a gpu then put use_gpu to true else to false
 
 For ex -
