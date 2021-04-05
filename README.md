@@ -21,7 +21,7 @@ _requirements.txt_ contains the Python packages used by the code and the website
 
 ## Technologies Used
 
-1. Tensorflow
+1. TensorFlow
 2. Scipy
 3. PIL
 4. Django
@@ -29,7 +29,7 @@ _requirements.txt_ contains the Python packages used by the code and the website
 ## Datasets Used
 
 1. MIT-Adobe 5K Dataset
-2. Samsung-s7 Dataset
+2. Samsung-S7 Dataset
 
 ## Installation and Setup Guide for Unix/Linux
 
