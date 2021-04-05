@@ -61,7 +61,7 @@ $ pip install -r requirement.txt
 4. Change Directory to that of test_model.py
 
 ```
-$ cd Our\ Work/Preliminary\ Code/
+$ cd MachineLearningContent/Preliminary\ Code/
 ```
 
 5. Run the model
