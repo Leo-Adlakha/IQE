@@ -33,6 +33,10 @@ _requirements.txt_ contains the Python packages used by the code and the website
 
 ## Installation and Setup Guide for Unix/Linux
 
+### For Anaconda
+
+To Setup environment in anaconda you can download and import [IQE_project.yml](https://anaconda.org/bhardwajprateek291200/iqe_project).
+
 ### For Model
 
 1. Clone the Github Repository
