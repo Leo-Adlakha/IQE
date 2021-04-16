@@ -55,7 +55,7 @@ $ source env/bin/activate
 3. Install all the necessary Packages in requirements.txt using pip package manager
 
 ```
-$ pip install -r requirement.txt
+$ pip install -r requirements.txt
 ```
 
 4. Change Directory to that of test_model.py
@@ -97,7 +97,7 @@ $ source env/bin/activate
 3. Install all the necessary Packages in requirements.txt using pip package manager
 
 ```
-$ pip install -r requirement.txt
+$ pip install -r requirements.txt
 ```
 
 4. Change Directory to run the Django Server
