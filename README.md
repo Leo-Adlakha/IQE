@@ -61,18 +61,16 @@ $ pip install -r requirements.txt
 4. Change Directory to that of test_model.py
 
 ```
-$ cd MachineLearningContent/Preliminary\ Code/
+$ cd MachineLearningContent/Final\ Code/
 ```
 
 5. Run the model
-
-* There are a few settings for the model to be run. Three Models are present based on the type of dataset used - iphone, blackberry and sony
 * If you have a gpu then put use_gpu to true else to false
 
 For ex -
 
 ```
-$ python3 test_model.py resolution=orig model=iphone use_gpu=false
+$ python3 test_model.py use_gpu=false
 ```
 
 ### For WebSite
